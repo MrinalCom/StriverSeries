@@ -1,23 +1,37 @@
 Node* segregateEvenOdd(Node* head)
 {
     // Write your code here
-    if(!head)return head;
-    Node *even_prev = nullptr;
-    Node *odd_prev = nullptr;
-    Node *e;
-    Node *o;
-    Node *temp = head;
-    while(temp){
-        if((temp->data %2) == 0){
-            even_prev != nullptr? even_prev->next=temp:e=temp;
-            even_prev=temp; 
+    Node*even=nullptr;
+    Node*odd=nullptr;
+    Node*e=nullptr;
+    Node*o=nullptr;
+    
+    
+    while(head){
+        if(head->data%2==0){
+            if(even==nullptr){
+                even=head;
+                e=head;
+            }
+
+            else {
+                e->next = head;
+                e = e->next;
+            }
         }
         else{
-            odd_prev != nullptr? odd_prev->next=temp:o=temp;
-            odd_prev=temp;
+            if(odd==nullptr){
+                odd=head;
+                o=head;
+            } else {
+                o->next = head;
+                o = o->next;
+            }
         }
-        temp=temp->next;
+        head = head->next;
     }
-    even_prev->next=o;
-    odd_prev->next=nullptr;
-    return e;
+    o->next=nullptr;
+    e->next=odd;
+    return even;
+    
+}
